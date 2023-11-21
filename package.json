@@ -34,7 +34,7 @@
     },
     "prettier": {
         "singleQuote": true,
-        "printWidth": 160,
+        "printWidth": 140,
         "useTabs": false,
         "tabWidth": 4,
         "semi": true,

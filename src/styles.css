@@ -1,1 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
+.header {
+  position: sticky;
+  top: 0;
+  background: #4d148c;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 2.15);
+  z-index: 10;
+  padding: 20px;
+}
+
+.header__logo {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.header__logo img {
+  width: 150px;
+  height: auto;
+}
+
+.header__navigation {
+  display: inline-block;
+  float: right;
+}
+
+.header__navigation ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.header__navigation li {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.header__navigation a {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .header__navigation li {
+    display: block;
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+}
+
+.fxg-copyright {
+  font-size: 14px;
+  color: #999;
+  text-align: center;
+  padding: 20px 0;
+}
