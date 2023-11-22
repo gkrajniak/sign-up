@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { emailValidator } from '../../shared/validators/email.validator';
@@ -20,10 +20,12 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
     signupForm!: FormGroup<SignUpForm>;
     private destroy$: Subject<void> = new Subject<void>();
     protected showPassword = false;
+    protected singUpResult: SingUpResult = { status: null };
 
     constructor(
         private fb: FormBuilder,
         private signUpService: SignUpService,
+        private changeDetectorRef: ChangeDetectorRef,
     ) {}
 
     ngOnInit(): void {
@@ -54,15 +56,23 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
             const user = this.signupForm.getRawValue() as User;
             this.signUpService.signUp(user).subscribe({
                 next: (response) => {
-                    console.log('Success!!!');
-                    console.log(response);
                     this.signupForm.reset();
+                    this.handleSingUpResult('success', `User ${user.firstName} ${user.lastName} has been signed up!`);
                 },
                 error: () => {
-                    console.log('Failure signing up!');
+                    this.handleSingUpResult('danger', 'Could not sign up the user!');
                 },
             });
         }
+    }
+
+    private handleSingUpResult(status: SingUpResultStatus, message: string) {
+        this.singUpResult = { status, message };
+        this.changeDetectorRef.detectChanges();
+        setTimeout(() => {
+            this.singUpResult = { status: null };
+            this.changeDetectorRef.detectChanges();
+        }, 5000);
     }
 
     protected isFieldInvalid(fieldName: FormField): boolean {
@@ -90,3 +100,10 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
         return !this.signupForm.valid;
     }
 }
+
+interface SingUpResult {
+    message?: string;
+    status: SingUpResultStatus;
+}
+
+type SingUpResultStatus = 'danger' | 'success' | null;
