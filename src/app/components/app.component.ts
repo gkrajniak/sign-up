@@ -10,6 +10,4 @@ import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
 })
-export class AppComponent {
-    title = 'sign-up';
-}
+export class AppComponent {}

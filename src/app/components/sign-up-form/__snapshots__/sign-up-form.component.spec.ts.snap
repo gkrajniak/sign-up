@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignUpFormComponent should match snapshot 1`] = `
+<app-sign-up-form
+  destroy$={[Function Subject]}
+  fb={[Function _FormBuilder]}
+  showPassword="false"
+  signupForm={[Function FormGroup]}
+>
+  <div
+    class="card"
+  >
+    <div
+      class="card-body"
+    >
+      <h5
+        class="card-title text-center"
+      >
+        Sign Up
+      </h5>
+      <form
+        class="ng-untouched ng-pristine ng-invalid"
+        novalidate=""
+      >
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label"
+            for="firstName"
+          >
+            First Name
+            <span
+              class="text-danger"
+            >
+              *
+            </span>
+          </label>
+          <input
+            class="form-control ng-untouched ng-pristine ng-invalid"
+            formcontrolname="firstName"
+            id="firstName"
+            type="text"
+          />
+          <div
+            class="invalid-feedback"
+            data-test="invalid-feedback-firstName"
+          >
+            First Name is required.
+          </div>
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label"
+            for="lastName"
+          >
+            Last Name
+            <span
+              class="text-danger"
+            >
+              *
+            </span>
+          </label>
+          <input
+            class="form-control ng-untouched ng-pristine ng-invalid"
+            formcontrolname="lastName"
+            id="lastName"
+            type="text"
+          />
+          <div
+            class="invalid-feedback"
+            data-test="invalid-feedback-lastName"
+          >
+            Last Name is required.
+          </div>
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label"
+            for="email"
+          >
+            Email
+            <span
+              class="text-danger"
+            >
+              *
+            </span>
+          </label>
+          <input
+            class="form-control ng-untouched ng-pristine ng-invalid"
+            formcontrolname="email"
+            id="email"
+            type="email"
+          />
+          <div
+            class="invalid-feedback"
+            data-test="invalid-feedback-email"
+          >
+            Email is required and must be a valid email address.
+          </div>
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label"
+            for="password"
+          >
+            Password
+            <span
+              class="text-danger"
+            >
+              *
+            </span>
+          </label>
+          <div
+            class="input-group"
+          >
+            <input
+              class="form-control ng-untouched ng-pristine ng-invalid"
+              formcontrolname="password"
+              id="password"
+              type="password"
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+            >
+              <i
+                class="bi bi-eye"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          class="d-flex justify-content-end mt-4"
+        >
+          <button
+            class="btn btn-primary"
+            disabled=""
+            type="submit"
+          >
+            Sign Up
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</app-sign-up-form>
+`;

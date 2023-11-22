@@ -15,7 +15,7 @@ import { Subject, takeUntil } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignUpFormComponent implements OnInit, OnDestroy {
-    protected signupForm!: FormGroup<SignUpForm>;
+    signupForm!: FormGroup<SignUpForm>;
     private destroy$: Subject<void> = new Subject<void>();
     protected showPassword = false;
 
@@ -44,7 +44,7 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
         this.destroy$.complete();
     }
 
-    protected onSubmit() {
+    onSubmit() {
         if (this.signupForm.valid) {
             console.log('Form submitted:', this.signupForm.value);
         }
@@ -69,5 +69,9 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
 
     protected togglePasswordVisibility() {
         this.showPassword = !this.showPassword;
+    }
+
+    protected formNotValid() {
+        return !this.signupForm.valid;
     }
 }
