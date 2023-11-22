@@ -41,6 +41,7 @@ exports[`SignUpFormComponent should match snapshot 1`] = `
           </label>
           <input
             class="form-control ng-untouched ng-pristine ng-invalid"
+            data-test="firstName-input"
             formcontrolname="firstName"
             id="firstName"
             type="text"
@@ -68,6 +69,7 @@ exports[`SignUpFormComponent should match snapshot 1`] = `
           </label>
           <input
             class="form-control ng-untouched ng-pristine ng-invalid"
+            data-test="lastName-input"
             formcontrolname="lastName"
             id="lastName"
             type="text"
@@ -95,6 +97,7 @@ exports[`SignUpFormComponent should match snapshot 1`] = `
           </label>
           <input
             class="form-control ng-untouched ng-pristine ng-invalid"
+            data-test="email-input"
             formcontrolname="email"
             id="email"
             type="email"
@@ -125,12 +128,14 @@ exports[`SignUpFormComponent should match snapshot 1`] = `
           >
             <input
               class="form-control ng-untouched ng-pristine ng-invalid"
+              data-test="password-input"
               formcontrolname="password"
               id="password"
               type="password"
             />
             <button
               class="btn btn-outline-secondary"
+              data-test="togglePassword-button"
               type="button"
             >
               <i
@@ -144,6 +149,7 @@ exports[`SignUpFormComponent should match snapshot 1`] = `
         >
           <button
             class="btn btn-primary"
+            data-test="submit-button"
             disabled=""
             type="submit"
           >
