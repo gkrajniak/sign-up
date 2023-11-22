@@ -2,20 +2,25 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SignUpFormComponent } from './sign-up-form.component';
 import { ChangeDetectorRef } from '@angular/core';
+import { SignUpService } from '../../service/sign-up.service';
+import { of } from 'rxjs';
 
 describe(SignUpFormComponent, () => {
     let component: SignUpFormComponent;
     let fixture: ComponentFixture<SignUpFormComponent>;
     let changeDetectorRef: ChangeDetectorRef;
+    let signUpService: SignUpService;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [SignUpFormComponent],
+            providers: [{ provide: SignUpService, useValue: { signUp: jest.fn().mockReturnValue(of({})) } }],
         }).compileComponents();
 
         fixture = TestBed.createComponent(SignUpFormComponent);
         component = fixture.componentInstance;
         changeDetectorRef = fixture.componentRef.injector.get(ChangeDetectorRef);
+        signUpService = TestBed.inject(SignUpService);
         fixture.detectChanges();
     });
 
@@ -95,12 +100,29 @@ describe(SignUpFormComponent, () => {
         });
     });
 
-    describe('check validation', () => {
-        it('should not execute submit button', function () {
+    describe('signUp', () => {
+        it('should submit the form to server', function () {
+            // given
+            const u = { firstName: 'testUser', lastName: 'lastName', email: 'test@example.com', password: 'testPassword' };
+            component.signupForm.setValue(u);
+
             // when
             component.onSubmit();
 
-            // then todo gkr
+            // then
+            expect(signUpService.signUp).toHaveBeenCalledWith(u);
+        });
+
+        it('should not submit the form to server, the form is invalid', function () {
+            // given
+            const u = { firstName: null, lastName: 'lastName', email: 'test@example.com', password: 'testPassword' };
+            component.signupForm.setValue(u);
+
+            // when
+            component.onSubmit();
+
+            // then
+            expect(signUpService.signUp).not.toHaveBeenCalled();
         });
     });
 });

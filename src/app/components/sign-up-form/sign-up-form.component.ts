@@ -2,9 +2,11 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { emailValidator } from '../../shared/validators/email.validator';
-import { FormField, SignUpForm } from '../models/sign-up-form';
+import { FormField, SignUpForm } from '../../models/sign-up-form';
 import { passwordValidator } from '../../shared/validators/password.validator';
 import { Subject, takeUntil } from 'rxjs';
+import { SignUpService } from '../../service/sign-up.service';
+import { User } from '../../models/user';
 
 @Component({
     selector: 'app-sign-up-form',
@@ -19,7 +21,10 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
     private destroy$: Subject<void> = new Subject<void>();
     protected showPassword = false;
 
-    constructor(private fb: FormBuilder) {}
+    constructor(
+        private fb: FormBuilder,
+        private signUpService: SignUpService,
+    ) {}
 
     ngOnInit(): void {
         this.signupForm = this.fb.group({
@@ -46,7 +51,17 @@ export class SignUpFormComponent implements OnInit, OnDestroy {
 
     onSubmit() {
         if (this.signupForm.valid) {
-            console.log('Form submitted:', this.signupForm.value);
+            const user = this.signupForm.getRawValue() as User;
+            this.signUpService.signUp(user).subscribe({
+                next: (response) => {
+                    console.log('Success!!!');
+                    console.log(response);
+                    this.signupForm.reset();
+                },
+                error: () => {
+                    console.log('Failure signing up!');
+                },
+            });
         }
     }
 

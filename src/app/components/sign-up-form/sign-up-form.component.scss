@@ -1,3 +1,14 @@
 .display-block {
   display: block;
 }
+
+.toast-container {
+  z-index: 10;
+  width: fit-content;
+  max-width: 300px;
+  min-width: 200px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.125rem 0.25rem 0 rgba(0, 0, 0, 0.05);
+}

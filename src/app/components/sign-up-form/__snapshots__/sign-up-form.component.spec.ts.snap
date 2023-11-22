@@ -5,6 +5,7 @@ exports[`SignUpFormComponent should match snapshot 1`] = `
   destroy$={[Function Subject]}
   fb={[Function _FormBuilder]}
   showPassword="false"
+  signUpService={[Function Object]}
   signupForm={[Function FormGroup]}
 >
   <div

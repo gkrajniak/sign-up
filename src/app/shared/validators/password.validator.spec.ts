@@ -1,6 +1,6 @@
 import { passwordContainsFirstLasNameMsg, passwordTooShortMsg, passwordWrongCaseMsg, passwordValidator } from './password.validator';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { SignUpForm } from '../../components/models/sign-up-form';
+import { SignUpForm } from '../../models/sign-up-form';
 
 describe(passwordValidator, () => {
     const fb = new FormBuilder();

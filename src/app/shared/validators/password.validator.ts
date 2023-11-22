@@ -1,5 +1,5 @@
 import { AbstractControl, FormGroup, ValidatorFn } from '@angular/forms';
-import { SignUpForm } from '../../components/models/sign-up-form';
+import { SignUpForm } from '../../models/sign-up-form';
 
 export const passwordTooShortMsg = 'Password needs to have at least 8 characters.';
 export const passwordWrongCaseMsg = 'Password needs to contain lower and uppercase letters.';

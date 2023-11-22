@@ -1,3 +1,10 @@
 .container {
   margin-top: 50px;
 }
+
+#toast-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
