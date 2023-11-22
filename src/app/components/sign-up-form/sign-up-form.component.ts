@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { emailValidator } from '../../shared/validators/email-validator';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { emailValidator } from '../../shared/validators/email.validator';
+import { FormField, SignUpForm } from '../models/sign-up-form';
+import { passwordValidator } from '../../shared/validators/password.validator';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'app-sign-up-form',
@@ -11,8 +14,10 @@ import { emailValidator } from '../../shared/validators/email-validator';
     styleUrl: './sign-up-form.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignUpFormComponent implements OnInit {
-    protected signupForm!: FormGroup<SignupForm>;
+export class SignUpFormComponent implements OnInit, OnDestroy {
+    protected signupForm!: FormGroup<SignUpForm>;
+    private destroy$: Subject<void> = new Subject<void>();
+    protected showPassword = false;
 
     constructor(private fb: FormBuilder) {}
 
@@ -22,10 +27,24 @@ export class SignUpFormComponent implements OnInit {
             lastName: ['', Validators.required],
             email: ['', [Validators.required, emailValidator()]],
             password: ['', Validators.required],
-            confirmPassword: ['', Validators.required],
+        });
+
+        this.signupForm.controls.password.addValidators(passwordValidator(this.signupForm));
+
+        this.signupForm.controls.firstName.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((v) => {
+            this.signupForm.controls.password.updateValueAndValidity();
+        });
+        this.signupForm.controls.lastName.valueChanges.pipe(takeUntil(this.destroy$)).subscribe((v) => {
+            this.signupForm.controls.password.updateValueAndValidity();
         });
     }
-    onSubmit() {
+
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
+
+    protected onSubmit() {
         if (this.signupForm.valid) {
             console.log('Form submitted:', this.signupForm.value);
         }
@@ -35,14 +54,20 @@ export class SignUpFormComponent implements OnInit {
         const control = this.signupForm.get(fieldName);
         return control ? control.invalid && control?.touched : false;
     }
-}
 
-interface SignupForm {
-    firstName: FormControl<string | null>;
-    lastName: FormControl<string | null>;
-    email: FormControl<string | null>;
-    password: FormControl<string | null>;
-    confirmPassword: FormControl<string | null>;
-}
+    protected getPasswordErrorMsg() {
+        const ctrl = this.signupForm.controls.password;
+        if (ctrl.hasError('required')) {
+            return 'Password is required.';
+        }
 
-type FormField = keyof SignupForm;
+        const invalidPassword = ctrl.getError('invalidPassword');
+        if (invalidPassword) {
+            return invalidPassword.message;
+        }
+    }
+
+    protected togglePasswordVisibility() {
+        this.showPassword = !this.showPassword;
+    }
+}

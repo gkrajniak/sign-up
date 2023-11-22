@@ -1,4 +1,4 @@
-import { emailValidator } from './email-validator';
+import { emailValidator } from './email.validator';
 import { FormControl } from '@angular/forms';
 
 describe(emailValidator, () => {
