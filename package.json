@@ -6,7 +6,10 @@
         "start": "ng serve",
         "build": "ng build",
         "watch": "ng build --watch --configuration development",
-        "test": "ng test"
+        "test": "ng test",
+        "e2e": "ng e2e",
+        "cypress:open": "cypress open",
+        "cy": "cypress run"
     },
     "private": true,
     "dependencies": {
@@ -28,7 +31,9 @@
         "@angular/cli": "^17.0.2",
         "@angular/compiler-cli": "^17.0.0",
         "@briebug/jest-schematic": "^6.0.0",
+        "@cypress/schematic": "^2.5.1",
         "@types/jest": "29.5.9",
+        "cypress": "latest",
         "jest": "^29.0.0",
         "typescript": "~5.2.2"
     },

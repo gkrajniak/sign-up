@@ -1,5 +1,6 @@
 @if (singUpResult.status) {
     <div
+        data-test="alert-div"
         class="alert"
         [ngClass]="{ 'alert-success': singUpResult.status === 'success', 'alert-danger': singUpResult.status === 'danger' }"
         role="alert">
@@ -17,6 +18,7 @@
                     type="text"
                     class="form-control"
                     id="firstName"
+                    data-test="firstName-input"
                     formControlName="firstName"
                     [class.is-invalid]="isFieldInvalid('firstName')" />
                 <div data-test="invalid-feedback-firstName" class="invalid-feedback">First Name is required.</div>
@@ -27,13 +29,20 @@
                     type="text"
                     class="form-control"
                     id="lastName"
+                    data-test="lastName-input"
                     formControlName="lastName"
                     [class.is-invalid]="isFieldInvalid('lastName')" />
                 <div data-test="invalid-feedback-lastName" class="invalid-feedback">Last Name is required.</div>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email<span class="text-danger">*</span></label>
-                <input type="email" class="form-control" id="email" formControlName="email" [class.is-invalid]="isFieldInvalid('email')" />
+                <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    data-test="email-input"
+                    formControlName="email"
+                    [class.is-invalid]="isFieldInvalid('email')" />
                 <div data-test="invalid-feedback-email" class="invalid-feedback">Email is required and must be a valid email address.</div>
             </div>
 
@@ -44,9 +53,14 @@
                         type="{{ showPassword ? 'text' : 'password' }}"
                         class="form-control"
                         id="password"
+                        data-test="password-input"
                         formControlName="password"
                         [class.is-invalid]="isFieldInvalid('password')" />
-                    <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()">
+                    <button
+                        type="button"
+                        data-test="togglePassword-button"
+                        class="btn btn-outline-secondary"
+                        (click)="togglePasswordVisibility()">
                         <i class="bi bi-eye{{ showPassword ? '-slash' : '' }}"></i>
                     </button>
                 </div>
@@ -58,7 +72,7 @@
             </div>
 
             <div class="d-flex justify-content-end mt-4">
-                <button type="submit" class="btn btn-primary" [disabled]="formNotValid()">Sign Up</button>
+                <button type="submit" data-test="submit-button" class="btn btn-primary" [disabled]="formNotValid()">Sign Up</button>
             </div>
         </form>
     </div>
