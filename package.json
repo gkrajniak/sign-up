@@ -9,7 +9,7 @@
         "test": "ng test",
         "e2e": "ng e2e",
         "cypress:open": "cypress open",
-        "cy": "cypress run"
+        "cy": "cypress run --browser chrome"
     },
     "private": true,
     "dependencies": {
