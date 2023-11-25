@@ -23,4 +23,4 @@ Run `ng test` to execute the unit tests via [Jest](https://jestjs.io/).
 
 ## Running end-to-end tests
 
-Run `npm run cy` to execute the end-to-end tests via [Cypress](https://www.cypress.io/).
+If the server is running, run `npm run cy` to execute the end-to-end tests via [Cypress](https://www.cypress.io/), ortherwise run the `ng serve` command first.
