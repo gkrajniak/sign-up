@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { SignUpFormComponent } from './sign-up-form/sign-up-form.component';
@@ -12,5 +12,6 @@ import { SignUpService } from '../service/sign-up.service';
     styleUrl: './app.component.scss',
     imports: [CommonModule, RouterOutlet, SignUpFormComponent, HttpClientModule],
     providers: [SignUpService],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {}
